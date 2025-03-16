@@ -1,0 +1,14 @@
+.main-content i{
+    margin: 20px 0px;
+    font-size: 10em;
+}
+
+.main-content .container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-content a{
+    margin: 20px 0px;
+}

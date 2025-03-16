@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parrocchia San Possidonio</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="/css/index.css"/>
+
+    <script src="/js/pages/home.js"></script>
+    <script src="/js/scripts.js"></script>
+    
+    <script src="https://kit.fontawesome.com/53a8c8d8bf.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div data-include="/components/navbar.html"></div>
+    <section class="letture bg-green section">
+        <div class="container">
+            <h2 class="letture-titolo text-l text-bold">Letture di oggi</h2>
+            <div class="letture-contenuto">
+                
+            </div>
+            <a href="https://www.chiesacattolica.it/liturgia-del-giorno/" class="btn text-m0" target="_blank">Leggi le letture di oggi</a>
+        </div>
+    </section>
+    <section class="orario section"id="orari">
+        <div class="container" >
+            <div class="orario-content">            
+                <h2 class="orario-titolo text-l text-bold">Oraio delle celebrazioni</h2>
+                <div class="orario-contenuto containerSmall">
+                    <ul>
+                        <li>
+                            <div class="orario-item">
+                                <p class="text-m2">Festiva</p>
+                                <p class="text-m1">Alle ore 9:30 e alle 11:00</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="orario-item">
+                                <p class="text-m2">Prima festiva</p>
+                                <p class="text-m1">Alle ore 18:30</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="orario-item">
+                                <p class="text-m2">Feriale</p>
+                                <p class="text-m1">Alle ore 9:00</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="orario-img">
+                <img src="images/fotoChiesa.jpg" alt="immagine">
+            </div>
+        </div>
+    </section>
+
+    <section class="avvisi bg-green section" id="avvisi">
+        <div class="container">
+            <h2 class="avvisi-titolo text-l text-bold">Avvisi settimanali</h2>
+            <div class="avvisi-display">
+
+            </div>
+            <div class="avvisi-arrows">
+                <button class="avvisi-prev btn btn-arrows"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="avvisi-next btn btn-arrows"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="eventi bg-green section">
+        <div class="container">
+            <h2 class="eventi-titolo text-l text-bold">Eventi</h2>
+            <div class="eventi-display">
+                <div class="eventi-grid">
+                    
+                </div>
+            </div>
+            <div class="eventi-arrows">
+                <button class="eventi-prev btn btn-arrows"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="eventi-next btn btn-arrows"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="info section bg-white" id="contatti">
+        <div class="container">
+            <div class="info-contatti">
+                <h2 class="info-contatti-titolo text-l text-bold">Contatti</h2>
+                <div class="info-contatti-contenuto containerSmall">
+                    <ul>
+                        <li>
+                            <div class="info-contatti-item">
+                                <p class="text-m2">E-mail</p>
+                                <a href="mailto:parrochiasanpossidonio@gmail.com" class="text-m1 text-too-long">parrochiasanpossidonio@gmail.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-contatti-item">
+                                <p class="text-m2">Telefono parrochia</p>
+                                <a href="tel:3714995097" class="text-m1">3714995097</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-contatti-item">
+                                <p class="text-m2">Telefono parroco</p>
+                                <a href="tel:3511767384" class="text-m1">3511767384</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info-indirizzo">
+                <h2 class="info-indirizzo-titolo text-l text-bold">Indirizzo</h2>
+                <div class="info-indirizzo-contenuto containerSmall">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d332.25264253202937!2d10.995384388796992!3d44.89248843375786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477f9191cd2381c7%3A0x7cc729ee5c30817b!2sCentro%20di%20Comunit%C3%A0%20San%20Possidonio!5e0!3m2!1sit!2sit!4v1741948378892!5m2!1sit!2sit"
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="info-indirizzo-mappa">
+                    </iframe>
+                    <a href="https://maps.app.goo.gl/w8izYaMhyQKWsTLJ7" target="_blank">Via antonio Gramsci, 2 - San Possidonio(MO)</a>
+                </div>
+            </div>
+            <div class="info-social">
+                <h2 class="info-social text-l text-bold">Seguici sui social</h2>
+                <div class="info-social-icon containerSmall">
+                    <div>
+                        <a href="https://www.instagram.com/parrocchia_di_sanpossidonio/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="https://www.facebook.com/p/Parrocchia-di-San-Possidonio-100067585585683" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div data-include="/components/footer.html"></div>
+</body>
+</html>
