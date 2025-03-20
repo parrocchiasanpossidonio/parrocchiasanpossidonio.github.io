@@ -1,6 +1,14 @@
 {
-  "avvisi": [
-  ],
+  "avvisi": [],
   "eventi": [
+    {
+      "dataAggiunto": "2025-03-20T10:10:50.055Z",
+      "titolo": "Grast 2025",
+      "descrizione": "",
+      "immagine": "locandinaGrest.jpg",
+      "immagini_aggiuntive": [],
+      "data": "2025-03-20T10:10:50.055Z",
+      "pagina": "grest2025.html"
+    }
   ]
 }
