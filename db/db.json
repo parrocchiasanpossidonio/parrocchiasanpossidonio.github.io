@@ -1,5 +1,11 @@
 {
-  "avvisi": [],
+  "avvisi": [
+    {
+      "dataAggiunto": "2025-04-09T13:24:45.476Z",
+      "titolo": "Avvisi dal 7 al 13 aprile",
+      "file": "avv-7.4.2025-13.4.2025.pdf"
+    }
+  ],
   "eventi": [
     {
       "dataAggiunto": "2025-03-20T10:10:50.055Z",
