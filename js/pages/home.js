@@ -101,21 +101,45 @@ document.addEventListener('DOMContentLoaded', function() {
             const eventoElement = document.createElement('div');
             eventoElement.className = 'eventi-item';
             
-            eventoElement.innerHTML = `
-                <a href=/eventi/${evento.pagina}>
-                    <div class="eventi-immagine">
-                        <div class="eventi-image-placeholder">
-                            <span class="loading-text">Caricamento...</span>
+            // Verifica se esiste una pagina dedicata all'evento
+            const hasPage = evento.pagina && evento.pagina.trim() !== '';
+            
+            // Crea HTML in base alla presenza o meno della pagina
+            if (hasPage) {
+                // Se c'è una pagina dedicata, mantieni il comportamento attuale
+                eventoElement.innerHTML = `
+                    <a href="/eventi/${evento.pagina}">
+                        <div class="eventi-immagine">
+                            <div class="eventi-image-placeholder">
+                                <span class="loading-text">Caricamento...</span>
+                            </div>
+                            <img data-src="/eventi/images/${evento.immagine}" 
+                                 alt="${evento.titolo}" 
+                                 class="eventi-immagine-img">
                         </div>
-                        <img data-src="/eventi/images/${evento.immagine}" 
-                             alt="${evento.titolo}" 
-                             class="eventi-immagine-img">
-                    </div>
-                    <div class="eventi-titolo">
-                        <h3 class="eventi-titolo-testo text-m1">${evento.titolo}</h3>
-                    </div>
-                </a>
-            `;
+                        <div class="eventi-titolo">
+                            <h3 class="eventi-titolo-testo text-m1">${evento.titolo}</h3>
+                        </div>
+                    </a>
+                `;
+            } else {
+                // Se non c'è una pagina dedicata, crea un elemento che aprirà l'immagine in una nuova scheda
+                eventoElement.innerHTML = `
+                    <a href="/eventi/images/${evento.immagine}" target="_blank">
+                        <div class="eventi-immagine">
+                            <div class="eventi-image-placeholder">
+                                <span class="loading-text">Caricamento...</span>
+                            </div>
+                            <img data-src="/eventi/images/${evento.immagine}" 
+                                 alt="${evento.titolo}" 
+                                 class="eventi-immagine-img">
+                        </div>
+                        <div class="eventi-titolo">
+                            <h3 class="eventi-titolo-testo text-m1">${evento.titolo}</h3>
+                        </div>
+                    </a>
+                `;
+            }
             
             eventiContainer.appendChild(eventoElement);
             
