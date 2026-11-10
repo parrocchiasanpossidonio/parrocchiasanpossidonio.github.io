@@ -1,0 +1,72 @@
+name: Build and publish parish preview
+
+on:
+  push:
+    branches: [main, 'ci/**']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: v3/package-lock.json
+      - name: Check Python contracts
+        run: python -m unittest discover -s tests -v
+      - name: Check frontend content mapping
+        run: node --test v3/tests/adapter.test.mjs
+      - name: Install locked build dependencies without lifecycle scripts
+        working-directory: v3
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate content, typecheck and build
+        run: python build_v3.py
+      - name: Package only the website and referenced documents
+        run: python scripts/package_pages.py
+      - name: Record public deployment identity
+        run: >-
+          python -c "import json, os; from pathlib import Path; Path('_site/build-info.json').write_text(json.dumps({'commit': os.environ['GITHUB_SHA']}), encoding='utf-8')"
+      - name: Upload website artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: _site
+          retention-days: 1
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure existing Pages site
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Deploy checked artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
