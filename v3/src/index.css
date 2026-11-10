@@ -1,0 +1,419 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------
+   Font locali (licenza SIL Open Font License), solo sottoinsieme latino.
+   Sono incorporati nella build: nessuna richiesta a servizi esterni.
+   ------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2")
+    format("woff2-variations");
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("../node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+/* -------------------------------------------------------------------------
+   Token di design: «carta, inchiostro e minio».
+   Due inchiostri da stampa (indaco e rosso minio) su carta, più un tocco d'ocra.
+   ------------------------------------------------------------------------- */
+@theme {
+  --color-carta: #f5efe2;
+  --color-carta-2: #ebe2cf;
+  --color-ink: #14213f;
+  --color-ink-2: #47506b;
+  --color-indaco: #1b2e5a;
+  --color-minio: #b3321c;
+  --color-minio-vivo: #d4432b;
+  --color-ocra: #e3b04b;
+
+  --font-display: "Fraunces Variable", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Atkinson Hyperlegible Next Variable", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  html.blocca-scorrimento {
+    overflow: hidden;
+  }
+
+  body {
+    min-height: 100dvh;
+    color: var(--color-ink);
+    background-color: var(--color-carta);
+    /* Grana leggera della carta */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .13 0 0 0 0 .25 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  /* Il titolo riceve il focus solo via script al cambio pagina (per chi usa lettori di schermo) */
+  h1:focus {
+    outline: none;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-minio-vivo);
+    outline-offset: 3px;
+  }
+
+  .su-indaco :focus-visible,
+  .su-indaco:focus-visible {
+    outline-color: var(--color-ocra);
+  }
+
+  ::selection {
+    background: var(--color-ocra);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .contenitore {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  /* La «rubrica»: nei libri liturgici le indicazioni sono scritte in rosso. */
+  .rubrica {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-minio);
+  }
+
+  .su-indaco .rubrica {
+    color: var(--color-ocra);
+  }
+
+  .lead {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.05rem + 1vw, 1.7rem);
+    line-height: 1.32;
+    font-weight: 400;
+    letter-spacing: -0.008em;
+  }
+
+  .orario {
+    font-family: var(--font-display);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  /* Pulsanti: blocco d'inchiostro con «fuori registro» rosso, come in una stampa a due colori */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.3rem;
+    border: 2px solid var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-carta);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--color-minio-vivo);
+    transition:
+      transform 0.16s ease,
+      box-shadow 0.16s ease;
+  }
+
+  .btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-minio-vivo);
+  }
+
+  .btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--color-minio-vivo);
+  }
+
+  .btn-chiaro {
+    background: var(--color-carta);
+    color: var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  .btn-chiaro:hover {
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .btn-chiaro:active {
+    box-shadow: 0 0 0 var(--color-ink);
+  }
+
+  .btn-ocra {
+    border-color: var(--color-ocra);
+    background: var(--color-ocra);
+    color: var(--color-ink);
+  }
+
+  .link {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+    text-decoration-color: var(--color-minio-vivo);
+    transition: color 0.16s ease;
+  }
+
+  .link:hover {
+    color: var(--color-minio);
+  }
+
+  .su-indaco .link {
+    text-decoration-color: var(--color-ocra);
+  }
+
+  .su-indaco .link:hover {
+    color: var(--color-ocra);
+  }
+
+  .freccia {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-weight: 700;
+  }
+
+  .freccia svg {
+    flex: none;
+    transition: transform 0.2s ease;
+  }
+
+  .freccia:hover svg,
+  .group:hover .freccia svg {
+    transform: translateX(5px);
+  }
+
+  /* Le «fonti»: due fili d'acqua che scorrono */
+  .onda,
+  .onda-chiara {
+    height: 22px;
+    background-repeat: repeat-x;
+    background-size: 48px 22px;
+    animation: scorri 7s linear infinite;
+  }
+
+  .onda {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='22' viewBox='0 0 48 22'%3E%3Cg fill='none' stroke-width='2.2'%3E%3Cpath stroke='%231b2e5a' d='M0 8c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5'/%3E%3Cpath stroke='%23d4432b' d='M0 18c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .onda-chiara {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='22' viewBox='0 0 48 22'%3E%3Cg fill='none' stroke-width='2.2'%3E%3Cpath stroke='%23f5efe2' d='M0 8c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5'/%3E%3Cpath stroke='%23e3b04b' d='M0 18c6 0 6-5 12-5s6 5 12 5 6-5 12-5 6 5 12 5'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Tratteggio per segnaposto intenzionali */
+  .tratteggio {
+    background-image: repeating-linear-gradient(135deg, rgb(20 33 63 / 0.14) 0 1.5px, transparent 1.5px 11px);
+  }
+
+  .voce-nav {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: 0.7rem;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .voce-nav::after {
+    content: "";
+    position: absolute;
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.3rem;
+    height: 3px;
+    background: var(--color-minio-vivo);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+
+  .voce-nav:hover::after,
+  .voce-nav[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  .voce-nav[aria-current="page"] {
+    color: var(--color-minio);
+  }
+
+  /* Finestre di dialogo native: gestiscono da sole focus, Esc e ritorno del focus */
+  .menu-dialog,
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    color: var(--color-carta);
+  }
+
+  .menu-dialog {
+    background: transparent;
+  }
+
+  .menu-dialog::backdrop {
+    background: rgb(20 33 63 / 0.6);
+  }
+
+  .menu-dialog[open],
+  .lightbox[open] {
+    animation: entra 0.24s ease-out both;
+  }
+
+  @media (min-width: 48rem) {
+    .menu-dialog {
+      left: auto;
+      width: min(30rem, 100%);
+    }
+  }
+
+  .lightbox {
+    background: var(--color-ink);
+  }
+
+  .lightbox::backdrop {
+    background: var(--color-ink);
+  }
+
+  .pagina-in {
+    animation: entra 0.36s ease-out both;
+  }
+}
+
+/* L'arco a tutto sesto: forma ricorrente (edicola, lunette, trittico). Utilità: accetta le varianti responsive. */
+@utility arco {
+  border-top-left-radius: 999rem;
+  border-top-right-radius: 999rem;
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scorri {
+  to {
+    background-position-x: -48px;
+  }
+}
+
+/* Rispetto della preferenza «riduci movimento» */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .onda,
+  .onda-chiara {
+    animation: none !important;
+  }
+}
+
+/* Stampa essenziale (utile per il foglio degli orari) */
+@media print {
+  body {
+    background: #fff;
+    font-size: 12pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pagina-in {
+    animation: none;
+  }
+
+  .onda,
+  .onda-chiara {
+    display: none;
+  }
+}

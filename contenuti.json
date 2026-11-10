@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "messe": [],
+  "avvisi": [],
+  "volantini": [],
+  "contatti": {
+    "email": "",
+    "telefono": "",
+    "instagram": "",
+    "facebook": "",
+    "whatsapp": ""
+  }
+}

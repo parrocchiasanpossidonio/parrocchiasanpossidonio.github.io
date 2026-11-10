@@ -1,0 +1,2 @@
+import { Intestazione } from "../components/ui"; import { contenuti } from "../data/site";
+export default function Volantini(){return <><Intestazione numero="III" sezione="Materiali" titolo="Volantini"/><section className="contenitore">{contenuti.volantini.length ? <ul>{contenuti.volantini.map((v,i)=><li key={i} className="border-t-2 border-ink py-4"><a className="link inline-flex min-h-11 items-center" href={v.file}>{v.titolo}</a></li>)}</ul> : <p>Nessun volantino disponibile.</p>}</section></>}
